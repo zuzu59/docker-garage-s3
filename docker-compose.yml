@@ -1,4 +1,4 @@
-#zf220207.1439
+#zf220207.1804
 # sources: https://garagehq.deuxfleurs.fr/documentation/cookbook/real-world/
 
 version: "3.9"
@@ -18,12 +18,11 @@ services:
   garage:
     container_name: garaged
     restart: unless-stopped
-    image: dxflrs/amd64_garage:v0.5.0.1
+    image: dxflrs/amd64_garage:v0.6.0
     ports:
       - '3900:3900'
       - '3901:3901'
       - '3902:3902'
-#    network_mode: "host"
     volumes:
       - $PWD/garage.toml:/etc/garage.toml
       - $PWD/meta:/var/lib/garage/meta
