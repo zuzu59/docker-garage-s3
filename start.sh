@@ -6,8 +6,9 @@
 # https://github.com/zuzu59/deploy-proxmox/blob/master/install_docker.sh
 
 docker-compose up -d
+docker-compose logs
 
-echo "Voilà, il faut attendre environ 30 secondes et après c'est http://localhost:8080 !"
+#echo "Voilà, il faut attendre environ 30 secondes et après c'est http://localhost:8080 !"
 
 exit
 

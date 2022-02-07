@@ -1,18 +1,17 @@
-#zf220207.1421
+#zf220207.1439
 # sources: https://garagehq.deuxfleurs.fr/documentation/cookbook/real-world/
 
 version: "3.9"
 
-Comment: >
-docker run \
-  -d \
-  --name garaged \
-  --restart always \
-  --network host \
-  -v /etc/garage.toml:/etc/garage.toml \
-  -v /var/lib/garage/meta:/var/lib/garage/meta \
-  -v /var/lib/garage/data:/var/lib/garage/data \
-  lxpz/garage_amd64:v0.4.0
+#docker run \
+#  -d \
+#  --name garaged \
+#  --restart always \
+#  --network host \
+#  -v /etc/garage.toml:/etc/garage.toml \
+#  -v /var/lib/garage/meta:/var/lib/garage/meta \
+#  -v /var/lib/garage/data:/var/lib/garage/data \
+#  lxpz/garage_amd64:v0.4.0
 
 
 services:
@@ -22,11 +21,12 @@ services:
     image: dxflrs/amd64_garage:v0.5.0.1
     ports:
       - '3900:3900'
+      - '3901:3901'
       - '3902:3902'
-    network_mode: host
+#    network_mode: "host"
     volumes:
-      - $PWD /etc/garage.toml:/etc/garage.toml
-      - $PWD /var/lib/garage/meta:/var/lib/garage/meta
-      - $PWD /var/lib/garage/data:/var/lib/garage/data
+      - $PWD/garage.toml:/etc/garage.toml
+      - $PWD/meta:/var/lib/garage/meta
+      - $PWD/data:/var/lib/garage/data
 
 
