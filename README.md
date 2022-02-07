@@ -1,7 +1,45 @@
 # docker-garage-s3
 Petit test de faire tourner Garage S3 dans un docker
 
-zf220207.1553
+zf220207.1724
+
+
+
+
+garage status
+
+garage layout assign -z dc1 -c 1 <node_id>
+garage layout assign -z dc1 -c 1 4bc5a996066b1b97
+
+garage layout apply --version 1
+
+garage bucket create 3sfs-zf
+
+garage bucket list
+
+garage bucket info 3sfs-zf
+
+garage key new --name 3sfs-zf-app-key
+
+garage key list
+
+garage key info 3sfs-zf-app-key
+
+garage bucket allow --read --write 3sfs-zf --key 3sfs-zf-app-key
+
+garage bucket info 3sfs-zf
+
+
+Sur la machine client:
+
+mettre les secrest dans .passwd-s3fs-garage
+
+s3fs 3sfs-zf ~/garage_s3 -o allow_other -o passwd_file=~/.passwd-s3fs-garage -o use_path_request_style -o endpoint=garage -o parallel_count=15 -o multipart_size=128 -o nocopyapi -o url=http://51.158.117.93:3900
+
+
+
+
+
 
 
 

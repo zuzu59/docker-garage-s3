@@ -1,6 +1,6 @@
 #!/bin/bash
 #Petit script pour arrêter tout le binz
-#zf211229.1423
+#zf220207.1700
 
 docker-compose stop
 

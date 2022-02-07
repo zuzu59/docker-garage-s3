@@ -1,17 +1,21 @@
 #!/bin/bash
 #Petit script pour démarrer tout le binz
-#zf220122.2118
+#zf220207.1716
 
 #pour installer Docker et Docker compose sur une machine Ubuntu c'est ici:
 # https://github.com/zuzu59/deploy-proxmox/blob/master/install_docker.sh
 
+
 docker-compose up -d
-docker-compose logs
+#docker-compose logs -f
 
-#echo "Voilà, il faut attendre environ 30 secondes et après c'est http://localhost:8080 !"
+echo -e "
+Il faut faire l'alias:
 
-exit
+alias garage='docker exec -it garaged /garage'
 
-docker rm -f thingspeak mysql55 
-docker run --name mysql55 -e MYSQL_ROOT_PASSWORD=speak -d mysql:5.5
-docker run --name thingspeak -p 8080:80 --link mysql55:mysql -d synomi/thingspeak
+Puis suivre la procédure dans: 
+
+https://garagehq.deuxfleurs.fr/documentation/quick-start/
+
+"
