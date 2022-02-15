@@ -1,7 +1,7 @@
 # docker-garage-s3
 Petit test de faire tourner Garage S3 dans un docker
 
-zf220207.1901
+zf220215.1831
 
 
 ## Buts
@@ -159,6 +159,66 @@ Attention, ça efface vraiment toute la parite Docker sur la machine, donc atten
 ./purge.sh
 sudo rm -rf data/ meta/
 ```
+
+
+### Soyons foufou, faisons-le tourner sur Gitpod juste pour faire joujou !
+
+En premier il faut lui mettre un **garage.toml** un peu *spécial* pour que cela puisse *tourner* sur Gitpod:
+
+```
+metadata_dir = "/var/lib/garage/meta"
+data_dir = "/var/lib/garage/data"
+
+replication_mode = "none"
+
+compression_level = 2
+
+rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "127.0.0.1:3901"
+rpc_secret = "97303b0ad721ddc7793bba689fd74cff44f8ee1fe20d4d266beb5c752373e9ae"
+
+bootstrap_peers = []
+
+[s3_api]
+s3_region = "garage"
+api_bind_addr = "[::]:3900"
+root_domain = ".s3.garage"
+
+[s3_web]
+bind_addr = "[::]:3902"
+root_domain = ".web.garage"
+index = "index.html"
+```
+
+Puis après dans son **rclone** config on ajoute cette section:
+```
+[garage]
+type = s3
+provider = Other
+env_auth = false
+access_key_id = GKfda8a6db258dd8d7a7f8a9e4
+secret_access_key = 1d8c6a4a4af4eaf25e352505630360d6b704d2a4f3760d0d9cfbd21037386215
+region = garage
+#endpoint = https://3000-zuzu59-dockergarages3-6m3q7onrntc.ws-eu31.gitpod.io/:3900
+endpoint = 3900-zuzu59-dockergarages3-6m3q7onrntc.ws-eu31.gitpod.io/
+bucket_acl = private
+force_path_style = true
+no_check_bucket = true
+```
+
+En mettant bien entendu SES **access_key_id** et **secret_access_key** que l'on aura récupérés quand on aura fait *tourner* garage sur Gitpod !
+
+Ainsi aussi que l'*url* de son Gitpod pour le **endpoint** !
+
+Et enfin, on ouvre tous les ports sur Gitpod, en cliquant en bas à droite de la fenêtre de Gitpod puis sur le petit *cadena* en haut à gauche sur tous les ports
+
+Et enfin on démarre l'interface WEB GUI de son rclone avec:
+
+```
+rclone rcd --rc-web-gui --rc-addr :5555 --rc-user admin --rc-pass toto
+```
+
+Et cela devrait fonctionner \o/
 
 
 ## Sources
