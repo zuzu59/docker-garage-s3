@@ -41,7 +41,7 @@ Il faut copier le fichier garage.toml.sample.one_node dans garage.toml avec la c
 ```
 cp garage.toml.sample.one_node garage.toml
 ```
-Puis le modifier en conséquence celon le quick start:
+Puis le modifier en conséquence selon le quick start:
 
 https://garagehq.deuxfleurs.fr/documentation/quick-start/
 
